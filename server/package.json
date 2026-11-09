@@ -1,7 +1,0 @@
-{
-  "name": "queuely-mail",
-  "private": true,
-  "dependencies": {
-    "nodemailer": "^6.10.1"
-  }
-}

@@ -1,5 +1,0 @@
-{
-  "java.autobuild.enabled": false,
-  "java.configuration.updateBuildConfiguration": "disabled",
-  "java.import.gradle.enabled": false
-}
