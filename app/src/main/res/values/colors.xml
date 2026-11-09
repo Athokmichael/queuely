@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="usiu_navy">#003366</color>
+    <color name="usiu_gold">#FFD700</color>
+    <color name="usiu_white">#FFFFFF</color>
+    <color name="usiu_light_gray">#F5F5F5</color>
+    <color name="usiu_dark_gray">#333333</color>
+    <color name="usiu_red">#D32F2F</color>
+    <color name="usiu_green">#00C853</color>
+    <color name="usiu_navy_dark">#002244</color>
+    <color name="usiu_gold_dark">#E6C200</color>
+</resources>

@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QueueLy screen designs</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: #ececec;
+      color: #333;
+    }
+    body.single { background: #fff; }
+    .board {
+      width: 1180px;
+      padding: 28px 32px 40px;
+    }
+    .board h1 {
+      font-size: 22px;
+      color: #003366;
+      font-weight: 700;
+    }
+    .board .sub {
+      margin-top: 4px;
+      margin-bottom: 22px;
+      font-size: 13px;
+      color: #555;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 260px);
+      gap: 28px 22px;
+    }
+    .frame-label {
+      font-size: 13px;
+      font-weight: 650;
+      color: #003366;
+      margin-bottom: 8px;
+    }
+    .scaler {
+      width: 250px;
+      height: 541px;
+      overflow: hidden;
+      border-radius: 18px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+    body.single .board { width: auto; padding: 0; }
+    body.single .board h1,
+    body.single .sub,
+    body.single .frame-label { display: none; }
+    body.single .grid { display: block; }
+    body.single .scaler {
+      width: 390px;
+      height: 844px;
+      border-radius: 0;
+      box-shadow: none;
+    }
+    body.single .phone { transform: none !important; }
+    .phone {
+      width: 390px;
+      height: 844px;
+      transform: scale(0.641);
+      transform-origin: top left;
+      background: #f5f5f5;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+    .status {
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      font-size: 12px;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+    .navy { background: #003366; color: #fff; }
+    .light .status { background: #003366; color: #fff; }
+    .header {
+      background: #003366;
+      color: #fff;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+      font-size: 18px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .back { margin-right: 10px; font-weight: 400; opacity: 0.9; }
+    .body { flex: 1; padding: 16px 16px 12px; overflow: hidden; }
+    .foot { padding: 8px 16px 16px; flex-shrink: 0; }
+    .btn {
+      display: block;
+      width: 100%;
+      height: 48px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: 700;
+      font-family: inherit;
+      text-align: center;
+      line-height: 48px;
+    }
+    .btn-gold { background: #FFD700; color: #003366; }
+    .btn-outline { background: #fff; color: #003366; border: 1.5px solid #003366; }
+    .btn-red { background: #D32F2F; color: #fff; }
+    .btn-green { background: #00C853; color: #fff; }
+    .gap { height: 8px; }
+    .muted { color: #555; font-size: 13px; }
+    .navy-text { color: #003366; font-weight: 700; }
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 14px;
+      margin-top: 10px;
+      border: 2px solid transparent;
+    }
+    .card.sel { border-color: #FFD700; }
+    .row { display: flex; align-items: center; }
+    .badge {
+      width: 40px; height: 40px; border-radius: 10px;
+      background: #003366; color: #FFD700;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; flex-shrink: 0;
+    }
+    .badge.gold { background: #FFD700; color: #003366; width: 44px; height: 44px; font-size: 22px; }
+    .grow { flex: 1; margin-left: 12px; }
+    .title { color: #003366; font-weight: 700; font-size: 15px; }
+    .small { font-size: 12px; color: #666; margin-top: 2px; }
+    .tag { color: #A68400; font-size: 12px; font-weight: 700; margin-top: 2px; }
+    .radio {
+      width: 18px; height: 18px; border-radius: 50%;
+      border: 2px solid #003366; flex-shrink: 0;
+    }
+    .radio.on { border-color: #C9A400; background: radial-gradient(circle, #C9A400 0 5px, transparent 6px); }
+    .field {
+      background: #f5f5f5;
+      border-radius: 8px;
+      padding: 10px 12px;
+      margin-top: 12px;
+    }
+    .field span { display: block; font-size: 11px; color: #003366; font-weight: 600; }
+    .field b { display: block; margin-top: 2px; font-size: 15px; color: #333; font-weight: 600; }
+    .hero {
+      background: #003366;
+      border-radius: 16px;
+      color: #fff;
+      text-align: center;
+      padding: 18px 16px 16px;
+    }
+    .hero .lbl { color: #FFD700; font-size: 13px; font-weight: 700; letter-spacing: 0.04em; }
+    .circle {
+      width: 96px; height: 96px; border-radius: 50%;
+      background: #FFD700; color: #003366;
+      margin: 10px auto 0;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 26px; font-weight: 800;
+    }
+    .stats { display: flex; gap: 10px; margin-top: 12px; }
+    .stat {
+      flex: 1; background: #fff; border-radius: 12px;
+      text-align: center; padding: 12px 8px;
+    }
+    .stat span { font-size: 12px; color: #666; }
+    .stat b { display: block; margin-top: 4px; font-size: 26px; color: #003366; }
+    .stat b.gold { color: #A68400; font-size: 22px; }
+    .bar { height: 8px; background: #e6e6e6; border-radius: 8px; margin-top: 10px; overflow: hidden; }
+    .bar i { display: block; height: 100%; width: 65%; background: #FFD700; }
+    .note {
+      margin-top: 10px; background: #FFF8E1; border: 1px solid #FFD700;
+      border-radius: 12px; padding: 12px; font-size: 13px; color: #003366;
+    }
+    .split { display: flex; justify-content: space-between; margin-top: 10px; font-size: 13px; }
+    .pill {
+      background: #FFD700; color: #003366; font-weight: 700;
+      font-size: 12px; border-radius: 8px; padding: 4px 8px;
+    }
+    .pill.navy { background: #003366; color: #FFD700; }
+    .login-wrap {
+      position: relative;
+      background: #003366; color: #fff; height: 100%;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 72px 28px 28px; text-align: center;
+    }
+    .mark { color: #FFD700; font-size: 64px; font-weight: 800; line-height: 1; }
+    .brand { font-size: 32px; font-weight: 800; margin-top: 6px; }
+    .gold { color: #FFD700; }
+    .login-card {
+      width: 100%; background: #fff; color: #333;
+      border-radius: 16px; padding: 20px; margin-top: 28px; text-align: left;
+    }
+    .login-card h2 { color: #003366; font-size: 18px; }
+    .center-screen {
+      position: relative;
+      background: #003366; height: 100%;
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; padding: 28px; text-align: center; color: #fff;
+    }
+    .check {
+      width: 72px; height: 72px; border-radius: 16px; background: #FFD700;
+      color: #003366; font-size: 36px; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .turn-card {
+      width: 100%; background: #fff; color: #333; border-radius: 16px;
+      padding: 18px; margin-top: 22px; text-align: center;
+    }
+    .line { height: 1px; background: #e6e6e6; margin: 12px 0; }
+    .who { display: flex; justify-content: space-between; align-items: center; }
+    .who b { color: #003366; font-size: 14px; }
+    .subline { font-size: 12px; color: #777; margin-top: 2px; }
+    .serving { background: #E8F5E9; }
+    .mini {
+      display: flex; gap: 8px; margin-top: 12px;
+    }
+    .mini div {
+      flex: 1; background: #fff; border-radius: 12px; padding: 12px;
+    }
+    .mini span { font-size: 12px; color: #666; }
+    .mini b { display: block; margin-top: 4px; color: #003366; font-size: 20px; }
+    .meter { height: 8px; background: #eee; border-radius: 8px; margin-top: 6px; }
+    .meter i { display: block; height: 100%; background: #003366; border-radius: 8px; }
+  </style>
+</head>
+<body>
+  <div class="board">
+    <h1>QueueLy — screen designs</h1>
+    <p class="sub">SWE 3090 · USIU-Africa course advisor queue · student and advisor</p>
+    <div class="grid" id="grid">
+
+      <div class="item" data-screen="login">
+        <div class="frame-label">01 · Student login</div>
+        <div class="scaler"><div class="phone">
+          <div class="login-wrap">
+            <div class="status" style="position:absolute;top:0;left:0;right:0;background:transparent;">9:41 <span>LTE</span></div>
+            <div class="mark">Q</div>
+            <div class="brand">QueueLy</div>
+            <div class="gold" style="font-weight:700;margin-top:4px;">USIU-Africa</div>
+            <p style="margin-top:16px;font-size:14px;">USIU Course Advisor Queue Management</p>
+            <div class="login-card">
+              <h2>Welcome to QueueLy</h2>
+              <div class="field"><span>Student ID</span><b>670375</b></div>
+              <div class="field"><span>Password</span><b>••••••••</b></div>
+              <div class="btn btn-gold" style="margin-top:16px;">Log In</div>
+            </div>
+            <p style="margin-top:22px;font-size:12px;color:#d5dbe3;">Virtual queue for course advisors</p>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="item" data-screen="school">
+        <div class="frame-label">02 · Select school</div>
+        <div class="scaler"><div class="phone light">
+          <div class="status">9:41 <span>LTE</span></div>
+          <div class="header">Select Your School</div>
+          <div class="body">
+            <p class="muted">Choose the school for your advisor visit</p>
+            <p class="navy-text" style="margin-top:4px;font-size:13px;">Student ID: 670375</p>
+            <div class="card"><div class="row"><div class="badge">H</div><div class="grow"><div class="title">Humanities &amp; Social Sciences</div></div><div class="radio"></div></div></div>
+            <div class="card sel"><div class="row"><div class="badge">S</div><div class="grow"><div class="title">Science &amp; Technology</div><div class="tag">Selected</div></div><div class="radio on"></div></div></div>
+            <div class="card"><div class="row"><div class="badge">B</div><div class="grow"><div class="title">School of Business</div></div><div class="radio"></div></div></div>
+            <div class="card"><div class="row"><div class="badge">P</div><div class="grow"><div class="title">Pharmacy &amp; Health Sciences</div></div><div class="radio"></div></div></div>
+          </div>
+          <div class="foot"><div class="btn btn-gold">Continue</div></div>
+        </div></div>
+      </div>
+
+      <div class="item" data-screen="request">
+        <div class="frame-label">03 · Purpose of visit</div>
+        <div class="scaler"><div class="phone light">
+          <div class="status">9:41 <span>LTE</span></div>
+          <div class="header"><span class="back">←</span> Purpose of Visit</div>
+          <div class="body">
+            <p class="muted">What do you need help with today?</p>
+            <p class="navy-text" style="margin-top:4px;font-size:13px;">School of Science &amp; Technology</p>
+            <div class="card"><div class="row"><div class="badge gold">+</div><div class="grow"><div class="title">Add Course</div><div class="small">Add a course to your schedule</div></div><div class="radio"></div></div></div>
+            <div class="card sel"><div class="row"><div class="badge gold">−</div><div class="grow"><div class="title">Drop Course</div><div class="small">Remove a course from your schedule</div><div class="tag">Selected</div></div><div class="radio on"></div></div></div>
+            <div class="card"><div class="row"><div class="badge gold">?</div><div class="grow"><div class="title">Academic Consultation</div><div class="small">Planning and guidance</div></div><div class="radio"></div></div></div>
+          </div>
+          <div class="foot"><div class="btn btn-gold">Join Queue</div></div>
+        </div></div>
+      </div>
+
+      <div class="item" data-screen="status">
+        <div class="frame-label">04 · Queue status</div>
+        <div class="scaler"><div class="phone light">
+          <div class="status">9:41 <span>LTE</span></div>
+          <div class="header">Your Queue Status</div>
+          <div class="body">
+            <div class="hero">
+              <div class="lbl">QUEUE NUMBER</div>
+              <div class="circle">A-042</div>
+              <p style="margin-top:10px;font-size:14px;">Drop Course · Science &amp; Technology</p>
+            </div>
+            <div class="stats">
+              <div class="stat"><span>Your position</span><b>4</b></div>
+              <div class="stat"><span>Estimated wait</span><b class="gold">~18 min</b></div>
+            </div>
+            <div class="card" style="margin-top:12px;">
+              <div class="title" style="font-size:14px;">Queue progress</div>
+              <div class="bar"><i></i></div>
+              <div class="split"><span>Students ahead</span><b style="color:#003366;">3 students</b></div>
+              <p class="small">Joined at 10:32 AM · first come, first served</p>
+            </div>
+            <div class="note">You will be notified when your turn is approaching.</div>
+          </div>
+          <div class="foot">
+            <div class="btn btn-outline">View History</div>
+            <div class="gap"></div>
+            <div class="btn btn-red">Leave Queue</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="item" data-screen="turn">
+        <div class="frame-label">05 · Your turn</div>
+        <div class="scaler"><div class="phone">
+          <div class="center-screen">
+            <div class="status" style="position:absolute;top:0;left:0;right:0;background:transparent;">9:41 <span>LTE</span></div>
+            <div class="check">✓</div>
+            <h2 class="gold" style="font-size:32px;margin-top:18px;">Your Turn!</h2>
+            <p style="margin-top:8px;font-size:15px;max-width:280px;">Please proceed to the course advisor office now.</p>
+            <div class="turn-card">
+              <div class="small">Queue number</div>
+              <div style="font-size:36px;font-weight:800;color:#003366;margin-top:4px;">A-042</div>
+              <div class="line"></div>
+              <div class="title">School of Science &amp; Technology</div>
+              <div class="small">Drop Course</div>
+              <p class="gold" style="margin-top:10px;font-weight:700;font-size:13px;">Block C, Room 204</p>
+            </div>
+            <div class="btn btn-green" style="margin-top:18px;">I'm Here</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="item" data-screen="history">
+        <div class="frame-label">06 · Queue history</div>
+        <div class="scaler"><div class="phone light">
+          <div class="status">9:41 <span>LTE</span></div>
+          <div class="header"><span class="back">←</span> Queue History</div>
+          <div class="body">
+            <p class="muted">Your previous advisor visits</p>
+            <div class="card">
+              <div class="who"><span class="pill">A-038</span><span class="pill navy">Completed</span></div>
+              <div class="title" style="margin-top:10px;">Add Course</div>
+              <div class="small">School of Science &amp; Technology</div>
+              <div class="subline">14 June 2026 · Wait 22 min</div>
+            </div>
+            <div class="card">
+              <div class="who"><span class="pill">A-021</span><span class="pill navy">Completed</span></div>
+              <div class="title" style="margin-top:10px;">Academic Consultation</div>
+              <div class="small">School of Science &amp; Technology</div>
+              <div class="subline">28 May 2026 · Wait 35 min</div>
+            </div>
+            <div class="card">
+              <div class="who"><span class="pill">A-009</span><span class="pill navy">Completed</span></div>
+              <div class="title" style="margin-top:10px;">Drop Course</div>
+              <div class="small">School of Science &amp; Technology</div>
+              <div class="subline">10 May 2026 · Wait 15 min</div>
+            </div>
+          </div>
+          <div class="foot"><div class="btn btn-gold">Back to Queue</div></div>
+        </div></div>
+      </div>
+
+      <div class="item" data-screen="advisor">
+        <div class="frame-label">07 · Advisor queue</div>
+        <div class="scaler"><div class="phone light">
+          <div class="status">9:41 <span>LTE</span></div>
+          <div class="header">Advisor Dashboard</div>
+          <div class="body">
+            <p class="navy-text">Science &amp; Technology</p>
+            <p class="small">Queue is open · 3 students in queue</p>
+            <div class="card serving">
+              <div class="who"><span class="pill">A-039</span><span class="pill navy">Now serving</span></div>
+              <div class="title" style="margin-top:8px;">Add Course</div>
+              <div class="small">Student 669102</div>
+            </div>
+            <div class="card">
+              <div class="who"><span class="pill">A-041</span><span class="small">Waiting</span></div>
+              <div class="title" style="margin-top:8px;">Consultation</div>
+              <div class="small">Student 671440</div>
+            </div>
+            <div class="card sel">
+              <div class="who"><span class="pill">A-042</span><span class="tag">Next</span></div>
+              <div class="title" style="margin-top:8px;">Drop Course</div>
+              <div class="small">Student 670375</div>
+            </div>
+          </div>
+          <div class="foot">
+            <div class="btn btn-gold">Call Next Student</div>
+            <div class="gap"></div>
+            <div class="btn btn-outline">Pause Queue</div>
+          </div>
+        </div></div>
+      </div>
+
+      <div class="item" data-screen="summary">
+        <div class="frame-label">08 · Daily summary</div>
+        <div class="scaler"><div class="phone light">
+          <div class="status">9:41 <span>LTE</span></div>
+          <div class="header"><span class="back">←</span> Today’s Summary</div>
+          <div class="body">
+            <p class="muted">Science &amp; Technology · 9 Oct 2026</p>
+            <div class="mini">
+              <div><span>Students served</span><b>12</b></div>
+              <div><span>Avg. consult</span><b>8 min</b></div>
+            </div>
+            <div class="card">
+              <div class="title" style="font-size:14px;">Requests today</div>
+              <div style="margin-top:12px;">
+                <div class="split" style="margin-top:0;"><span>Add Course</span><b>5</b></div>
+                <div class="meter"><i style="width:70%"></i></div>
+              </div>
+              <div style="margin-top:12px;">
+                <div class="split" style="margin-top:0;"><span>Drop Course</span><b>4</b></div>
+                <div class="meter"><i style="width:55%"></i></div>
+              </div>
+              <div style="margin-top:12px;">
+                <div class="split" style="margin-top:0;"><span>Consultation</span><b>3</b></div>
+                <div class="meter"><i style="width:40%"></i></div>
+              </div>
+            </div>
+            <div class="card">
+              <div class="title" style="font-size:14px;">Latest completed</div>
+              <div class="who" style="margin-top:10px;"><span class="pill">A-038</span><span class="small">Add Course · 22 min wait</span></div>
+              <div class="who" style="margin-top:10px;"><span class="pill">A-037</span><span class="small">Drop Course · 15 min wait</span></div>
+            </div>
+          </div>
+          <div class="foot"><div class="btn btn-gold">Back to Queue</div></div>
+        </div></div>
+      </div>
+
+    </div>
+  </div>
+  <script>
+    const screen = new URLSearchParams(location.search).get("screen");
+    if (screen) {
+      document.body.classList.add("single");
+      document.querySelectorAll(".item").forEach((el) => {
+        if (el.dataset.screen !== screen) el.remove();
+      });
+    }
+  </script>
+</body>
+</html>

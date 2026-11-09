@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>QueueLy extra screens</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: "Segoe UI", system-ui, sans-serif; background: #fff; }
+    .phone { width: 390px; height: 844px; display: none; flex-direction: column; background: #f5f5f5; overflow: hidden; }
+    body.single .phone.on { display: flex; }
+    .status { height: 28px; background: #003366; color: #fff; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; font-size: 12px; font-weight: 600; }
+    .header { background: #003366; color: #fff; height: 52px; display: flex; align-items: center; padding: 0 16px; font-size: 18px; font-weight: 700; }
+    .body { flex: 1; padding: 16px; }
+    .foot { padding: 8px 16px 16px; }
+    .btn { display: block; width: 100%; height: 48px; border-radius: 8px; font-size: 16px; font-weight: 700; text-align: center; line-height: 48px; }
+    .gold { background: #FFD700; color: #003366; }
+    .red { background: #D32F2F; color: #fff; }
+    .outline { background: #fff; color: #003366; border: 1.5px solid #003366; }
+    .gap { height: 8px; }
+    .card { background: #fff; border-radius: 12px; padding: 14px; margin-top: 12px; }
+    .title { color: #003366; font-weight: 700; font-size: 15px; }
+    .muted { color: #555; font-size: 13px; }
+    .navy { color: #003366; font-weight: 700; }
+    .center {
+      background: #003366; color: #fff; height: 100%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 32px;
+    }
+    .mark {
+      width: 72px; height: 72px; border-radius: 16px; background: #FFD700; color: #003366;
+      font-size: 32px; font-weight: 800; display: flex; align-items: center; justify-content: center;
+    }
+    .hero { background: #003366; color: #fff; border-radius: 16px; text-align: center; padding: 22px 16px; }
+    .circle {
+      width: 88px; height: 88px; border-radius: 50%; background: #FFD700; color: #003366;
+      margin: 10px auto 0; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800;
+    }
+  </style>
+</head>
+<body>
+  <div class="phone" data-screen="notify">
+    <div class="status">9:41 <span>LTE</span></div>
+    <div class="header">Notification</div>
+    <div class="body">
+      <div class="hero">
+        <div style="color:#FFD700;font-weight:700;font-size:13px;">YOUR TURN IS NEAR</div>
+        <div class="circle">A-042</div>
+        <p style="margin-top:12px;font-size:15px;">2 students ahead</p>
+        <p style="margin-top:4px;font-size:14px;color:#FFD700;">About 8 minutes</p>
+      </div>
+      <div class="card">
+        <div class="title">Drop Course</div>
+        <p class="muted" style="margin-top:4px;">School of Science &amp; Technology</p>
+        <p class="muted" style="margin-top:8px;">Please stay near Block C, Room 204.</p>
+      </div>
+    </div>
+    <div class="foot"><div class="btn gold">View my queue</div></div>
+  </div>
+
+  <div class="phone" data-screen="leave">
+    <div class="status">9:41 <span>LTE</span></div>
+    <div class="header">Leave queue</div>
+    <div class="body">
+      <div class="card" style="margin-top:24px;text-align:center;padding:28px 16px;">
+        <div class="title" style="font-size:20px;">Leave the queue?</div>
+        <p class="muted" style="margin-top:10px;">Ticket A-042 will be given up. You can join again later.</p>
+        <p class="navy" style="margin-top:16px;">Drop Course · Science &amp; Technology</p>
+      </div>
+    </div>
+    <div class="foot">
+      <div class="btn gold">Stay in queue</div>
+      <div class="gap"></div>
+      <div class="btn red">Leave queue</div>
+    </div>
+  </div>
+
+  <div class="phone" data-screen="complete">
+    <div class="status">9:41 <span>LTE</span></div>
+    <div class="header">Consultation</div>
+    <div class="body">
+      <p class="navy">Now serving</p>
+      <div class="card">
+        <div class="title">A-039 · Add Course</div>
+        <p class="muted" style="margin-top:4px;">Student 669102</p>
+        <p class="muted" style="margin-top:8px;">Started at 10:41 AM</p>
+      </div>
+      <div class="card">
+        <div class="title">Next in line</div>
+        <p class="muted" style="margin-top:4px;">A-042 · Drop Course · Student 670375</p>
+      </div>
+    </div>
+    <div class="foot">
+      <div class="btn gold">Mark completed</div>
+      <div class="gap"></div>
+      <div class="btn outline">Call next student</div>
+    </div>
+  </div>
+
+  <div class="phone" data-screen="paused">
+    <div class="center">
+      <div class="status" style="position:absolute;top:0;left:0;right:0;background:transparent;">9:41 <span>LTE</span></div>
+      <div class="mark">II</div>
+      <h2 style="color:#FFD700;font-size:30px;margin-top:18px;">Queue paused</h2>
+      <p style="margin-top:10px;font-size:15px;max-width:280px;">The advisor will resume shortly. Ticket A-042 is still yours.</p>
+      <div class="btn gold" style="margin-top:28px;">Back to my queue</div>
+    </div>
+  </div>
+  <script>
+    const screen = new URLSearchParams(location.search).get("screen");
+    document.body.classList.add("single");
+    const el = document.querySelector('[data-screen="' + screen + '"]');
+    if (el) {
+      el.classList.add("on");
+      if (screen === "paused") el.querySelector(".center").style.position = "relative";
+    }
+  </script>
+</body>
+</html>
